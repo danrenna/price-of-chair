@@ -12,7 +12,9 @@ class Database(object):
     @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client['fullstack']
+        Database.DATABASE = client.get_default_database()
+        # need to change database we are selecting to one from mongolab (last part after '/')
+        # default database is one that appears at end of URI, mongolab won't let us create additional databases for this URI
 
     @staticmethod
     def insert(collection, data):
